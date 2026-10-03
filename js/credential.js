@@ -1,0 +1,1 @@
+const PROJECT = 'https://sigyfdacpweiryjngszs.supabase.co'
