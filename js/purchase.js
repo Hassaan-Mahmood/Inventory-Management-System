@@ -46,6 +46,3 @@ purchaseSaveBtn.onclick = () => {
     text: "Purchase form is valid",
   });
 };
-
-
-
