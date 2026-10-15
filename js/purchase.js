@@ -18,6 +18,8 @@ const purchaseClearBtn = document.getElementById("purchaseClearBtn");
 const purchaseSaveBtn = document.getElementById("purchaseSaveBtn");
 const purchaseTableBody = document.getElementById("purchaseTableBody");
 
+
+
 // ================= Save purchase =================
 purchaseSaveBtn.onclick = () => {
   // supplier ka naam name field ki tarah check hoga
@@ -44,3 +46,6 @@ purchaseSaveBtn.onclick = () => {
     text: "Purchase form is valid",
   });
 };
+
+
+console.log(purchaseForm)
