@@ -48,11 +48,4 @@ purchaseSaveBtn.onclick = () => {
 };
 
 
-console.log(purchaseForm)
-console.log(purchaseSupplier)
-console.log(purchaseInvoice)
-console.log(purchaseProduct)
-console.log(purchaseCategory)
-console.log(purchaseQty)
-console.log(علی)
-             
+
