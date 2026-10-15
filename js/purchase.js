@@ -51,3 +51,4 @@ purchaseSaveBtn.onclick = () => {
 console.log(purchaseForm)
 console.log(purchaseSupplier)
 console.log(purchaseInvoice)
+console.log(purchaseProduct)
