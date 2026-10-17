@@ -7,6 +7,7 @@ const sellProduct = document.getElementById("sellProduct");
 const sellQty = document.getElementById("sellQty");
 const sellPrice = document.getElementById("sellPrice");
 const sellClearBtn = document.getElementById("sellClearBtn");
+const sellTableBody = document.getElementById("sellTableBody");
 const sellSaveBtn = document.getElementById("sellSaveBtn");
 let allPurchases = [];
 
@@ -36,6 +37,43 @@ const getAllPurchases = async () => {
         sellProduct.innerHTML += `
         <option value=${element.id}>${element.product_name} ( ${element.available_quantity} )</option>
         `;
+      }
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error.message,
+    });
+  }
+};
+
+const getAllSales = async () => {
+  try {
+    const { data, error } = await supabase.from("sales").select();
+    if (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.message,
+      });
+    } else {
+      sellTableBody.innerHTML = "";
+      for (let i = 0; i < data.length; i++) {
+        const element = data[i];
+        console.log(element);
+
+        sellTableBody.innerHTML += `
+         <tr>
+                <td>${element.customer_name}</td>
+                <td>${element.purchase_id}</td>
+                <td>${element.quantity}</td>
+                <td>${element.price}</td>
+                <td>${element.price * element.quantity}</td>
+                <td><button>Delete</button></td>
+              </tr>
+        `;
+        console.log(element);
       }
     }
   } catch (error) {
@@ -114,3 +152,4 @@ sellSaveBtn.onclick = async () => {
 };
 
 getAllPurchases();
+getAllSales();
