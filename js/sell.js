@@ -82,10 +82,10 @@ sellSaveBtn.onclick = async () => {
         text: error.message,
       });
     } else {
-      const { error } = await supabase
-        .from("purchases")
-        .update({ available_quantity: initial_Quantity - sellQty.value })
-        .eq("id", sale.purchase_id);
+      // const { error } = await supabase
+      //   .from("purchases")
+      //   .update({ available_quantity: initial_Quantity - sellQty.value })
+      //   .eq("id", sale.purchase_id);
       Swal.fire({
         icon: "success",
         title: "Done",
