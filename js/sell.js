@@ -8,6 +8,7 @@ const sellQty = document.getElementById("sellQty");
 const sellPrice = document.getElementById("sellPrice");
 const sellClearBtn = document.getElementById("sellClearBtn");
 const sellSaveBtn = document.getElementById("sellSaveBtn");
+let allPurchases = [];
 
 const resetForm = () => {
   sellCustomer.value = "";
@@ -25,6 +26,7 @@ const getAllPurchases = async () => {
         text: error.message,
       });
     } else {
+      allPurchases = data;
       sellProduct.innerHTML += ``;
       sellProduct.innerHTML += `
       <option value="">Select product</option>
@@ -71,7 +73,9 @@ sellSaveBtn.onclick = async () => {
     price: Number(sellPrice.value),
   };
 
-  console.log("sale", sale);
+  const findProduct = allPurchases.find((item) => {
+    return item.id === sale.purchase_id;
+  });
 
   try {
     const { error } = await supabase.from("sales").insert(sale);
@@ -82,16 +86,19 @@ sellSaveBtn.onclick = async () => {
         text: error.message,
       });
     } else {
-      // const { error } = await supabase
-      //   .from("purchases")
-      //   .update({ available_quantity: initial_Quantity - sellQty.value })
-      //   .eq("id", sale.purchase_id);
+      await supabase
+        .from("purchases")
+        .update({
+          available_quantity: findProduct.available_quantity - sellQty.value,
+        })
+        .eq("id", sale.purchase_id);
       Swal.fire({
         icon: "success",
         title: "Done",
         text: "Sale has been created",
       });
       resetForm();
+      getAllPurchases();
     }
   } catch (error) {
     Swal.fire({
